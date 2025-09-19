@@ -11,3 +11,53 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.nav-link {
+  margin-left: 40px;
+}
+
+.col a:hover {
+ color:#387ed1 !important;
+}
+
+.social-icons-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.social-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.social-icons-wrapper i {
+  font-size: 22px;
+  color: #555;
+  cursor: pointer;
+}
+
+.social-icons-wrapper i:hover {
+  color: #387ed1;
+}
+
+.footer-legal-links {
+  text-align: center; 
+  padding: 20px 0; 
+  border-top: 1px solid #eee; 
+  margin-top: 20px;
+}
+
+.footer-legal-links a {
+  color: #888; 
+  text-decoration: none; 
+  font-size: 14px; 
+  transition: color 0.2s ease;
+  margin: 0 10px;
+}
+
+.footer-legal-links a:hover {
+  color: #387ed1; 
+}
