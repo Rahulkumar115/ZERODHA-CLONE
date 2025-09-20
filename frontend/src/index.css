@@ -61,3 +61,39 @@ code {
 .footer-legal-links a:hover {
   color: #387ed1; 
 }
+
+.logo-container {
+    width: 180px;   
+    height: 90px;   
+    display: flex;  
+    justify-content: center; 
+    align-items: center;   
+    margin: 0 auto 10px auto; 
+}
+
+.product-logo {
+  width: 300px;
+  height: 100px
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #dee2e6; 
+}
+
+.nav-tabs .nav-link {
+    border: none; 
+    border-bottom: 2px solid transparent; 
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    color: #0d6efd; 
+    background-color: transparent; 
+    border-color: transparent transparent #0d6efd transparent; 
+}
+
+.tab-content {
+    border: none;
+}
+
+
