@@ -11,7 +11,7 @@ function Hero() {
           <div className="col-md-12">
             <div className="d-flex justify-content-between align-items-center">
               <h1 className="h2">Support Portal</h1>
-              <a href="#" className="btn btn-primary">My tickets</a>
+              <a href="#" className="btn btn-primary support-button">My tickets</a>
             </div>
           </div>
         </div>

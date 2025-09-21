@@ -4,41 +4,73 @@ import AccordionItem from './AccordionItem';
 
 function CreateTicket() {
     return (
-    <div className="accordion" id="supportAccordion">
+        <div className="accordion" id="supportAccordion">
 
-      <AccordionItem id="One" title="Account Opening" icon="bi bi-plus-circle">
-        {/* This content is passed as "children" */}
-        <ul className="list-unstyled ps-4">
-            <li className="py-2"><a href="#" className="text-decoration-none text-secondary">Resident individual</a></li>
-            <li className="py-2"><a href="#" className="text-decoration-none text-secondary">Minor</a></li>
-        </ul>
-      </AccordionItem>
+            <AccordionItem id="One" title="Account Opening" icon="fa-solid fa-plus">
+                {/* This content is passed as "children" */}
+                <ul className="ps-4 text-primary">
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Resident individual</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Minor</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Non Resident Indian (NRI)</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Company, Partnership, HUF and LLP</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Glossary</a></li>
+                </ul>
+            </AccordionItem>
 
-      <AccordionItem id="Two" title="Your Zerodha Account" icon="bi bi-person-circle">
-        <ul className="list-unstyled ps-4">
-            <li className="py-2"><a href="#" className="text-decoration-none text-secondary">Your Profile</a></li>
-            <li className="py-2"><a href="#" className="text-decoration-none text-secondary">Account modification</a></li>
-        </ul>
-      </AccordionItem>
+            <AccordionItem id="Two" title="Your Zerodha Account" icon="fa-solid fa-circle-user">
+                <ul className="ps-4 text-primary">
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Your Profile</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Account modification</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Client Master Report (CMR) and Depository Participant (DP)</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Nomination</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Transfer and conversion of securities</a></li>
+                </ul>
+            </AccordionItem>
 
-      <AccordionItem id="Three" title="Kite" icon="bi bi-app-indicator">
-        <p>Content for Kite goes here.</p>
-      </AccordionItem>
+            <AccordionItem id="Three" title="Kite" icon="fa-brands fa-kickstarter">
+                <ul className="ps-4 text-primary">
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">IPO</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Trading FAQs</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Margin Trading Facility (MTF) and Margins</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Charts and orders</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Alerts and Nudges</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-text-primary support-link">General</a></li>
+                </ul>
+            </AccordionItem>
 
-      <AccordionItem id="Four" title="Funds" icon="bi bi-wallet-fill">
-        <p>Content for Funds goes here.</p>
-      </AccordionItem>
+            <AccordionItem id="Four" title="Funds" icon="fa-solid fa-indian-rupee-sign">
+                <ul className="ps-4 text-primary">
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Add money</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Withdraw money</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Add bank accounts</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">eMandates</a></li>
+                </ul>
+            </AccordionItem>
 
-      <AccordionItem id="Five" title="Console" icon="bi bi-display">
-        <p>Content for Console goes here.</p>
-      </AccordionItem>
-      
-      <AccordionItem id="Six" title="Coin" icon="bi bi-currency-bitcoin">
-        <p>Content for Coin goes here.</p>
-      </AccordionItem>
+            <AccordionItem id="Five" title="Console" icon="fa-solid fa-circle-notch">
+                <ul className="ps-4 text-primary">
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Portfolio</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Corporate actions</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Funds statement</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Reports</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Profile</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-text-primary support-link">Segments</a></li>
+                </ul>
+            </AccordionItem>
 
-    </div>
-  );
+            <AccordionItem id="Six" title="Coin" icon="fa-solid fa-coins">
+                <ul className="ps-4 text-primary">
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Mutual funds</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">National Pension Scheme (NPS)</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Fixed Deposit (FD)</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Features on Coin</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-primary support-link">Payments and Orders</a></li>
+                    <li className="py-2 support-link"><a href="#" className="text-decoration-none text-text-primary support-link">General</a></li>
+                </ul>
+            </AccordionItem>
+
+        </div>
+    );
 };
 
 export default CreateTicket;

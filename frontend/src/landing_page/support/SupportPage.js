@@ -13,15 +13,15 @@ function SupportPage() {
         <>
             <Hero />
             <div className="container">
-            <div className="row">
-                <div className="col-lg-8 mt-5">
-                    <CreateTicket />
+                <div className="row">
+                    <div className="col-lg-8 mt-5">
+                        <CreateTicket />
+                    </div>
+                    <div className="col-lg-4 mt-5">
+                        <SidePanel />
+                    </div>
+
                 </div>
-                <div className="col-lg-4 mt-5">
-                    <SidePanel/>
-                </div>
-            
-            </div>
             </div>
         </>
     );

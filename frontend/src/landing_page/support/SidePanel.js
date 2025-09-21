@@ -15,10 +15,10 @@ const SidePanel = () => {
     </div>
     <h6 className="mt-4 text-muted">Quick links</h6>
       <ol className="list-unstyled text-secondary">
-        <li className="py-1"><a href='#' style={{textDecoration:"none"}}>1. Track account opening </a></li>
-        <li className="py-1"><a href='#' style={{textDecoration:"none"}}>2. Track segment activation </a></li>
-        <li className="py-1"><a href='#' style={{textDecoration:"none"}}>3. Intraday margins </a></li>
-        <li className="py-1"><a href='#' style={{textDecoration:"none"}}>4. Kite user manual </a></li>
+        <li className="py-1"><a href='#' style={{textDecoration:"none"}} className='support-link'>1. Track account opening </a></li>
+        <li className="py-1"><a href='#' style={{textDecoration:"none"}} className='support-link'>2. Track segment activation </a></li>
+        <li className="py-1"><a href='#' style={{textDecoration:"none"}} className='support-link'>3. Intraday margins </a></li>
+        <li className="py-1"><a href='#' style={{textDecoration:"none"}} className='support-link'>4. Kite user manual </a></li>
       </ol>
     </div>
   );

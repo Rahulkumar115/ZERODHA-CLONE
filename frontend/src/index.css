@@ -120,10 +120,18 @@ code {
   width: 28px;       /* Fixed width */
   height: 28px;      /* Fixed height */
   padding: 5px;
-  font-size: 14px;
+  font-size: 20px;
   color: #3b82f6;    /* Icon color (blue) */
   background-color: #eff6ff; /* Light blue background */
   border-radius: 50%; /* This makes it a circle */
+}
+
+.support-link:hover {
+  color: black !important;
+}
+
+.support-button:hover {
+  background-color: black;
 }
 
 
