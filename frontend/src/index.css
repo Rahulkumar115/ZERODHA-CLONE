@@ -96,4 +96,34 @@ code {
     border: none;
 }
 
+.support-side-panel {
+    border-left: 8px solid #ff9800; /* Orange border */
+    background-color: #f7f0f1;
+  }
+  .accordion-item {
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+  }
+  .accordion-button:focus {
+    box-shadow: none; /* Removes the blue glow on click */
+  }
+  .accordion-button:not(.collapsed) {
+    color: #0d6efd; /* Changes text color when open */
+    background-color: #e7f1ff;
+  }
+
+  /* Style for the icon backgrounds */
+.support-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;       /* Fixed width */
+  height: 28px;      /* Fixed height */
+  padding: 5px;
+  font-size: 14px;
+  color: #3b82f6;    /* Icon color (blue) */
+  background-color: #eff6ff; /* Light blue background */
+  border-radius: 50%; /* This makes it a circle */
+}
+
 
