@@ -214,6 +214,84 @@ app.get("/allOrders", async(req,res) => {
     res.json(allOrders);
 });
 
+// This is the POST route for buying a stock
+app.post("/buyStock", async (req, res) => {
+  try {
+    const { name } = req.body;
+    const qty = Number(req.body.qty);
+    const price = Number(req.body.price);
+    
+    const existingHolding = await HoldingsModel.findOne({ name: name });
+
+    if (existingHolding) {
+      // If Holding Exists: Update it
+      const oldQty = existingHolding.qty;
+      const oldAvg = existingHolding.avg;
+
+      // Calculate the new weighted average cost
+      const newAvg = ((oldAvg * oldQty) + (price * qty)) / (oldQty + qty);
+      
+      // Update the document
+      existingHolding.qty += qty;
+      existingHolding.avg = newAvg;
+      existingHolding.price = price; // Update the last traded price
+      
+      await existingHolding.save();
+      res.send("Holding updated successfully!");
+
+    } else {
+      // If Holding Doesn't Exist: Create a new one
+      const newHolding = new HoldingsModel({
+        name: name,
+        qty: qty,
+        avg: price,   // The first avg cost is the purchase price
+        price: price, // The current price is also the purchase price
+      });
+
+      await newHolding.save();
+      res.status(201).send("New holding added successfully!");
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error processing buy order" });
+  }
+});
+
+app.post("/sellStock", async (req, res) => {
+  try {
+    const { name, qty, price } = req.body;
+    
+    // 1. Find the stock in your holdings
+    const existingHolding = await HoldingsModel.findOne({ name: name });
+
+    // 2. Validate the request
+    if (!existingHolding) {
+      return res.status(404).json({ message: "Stock not found in your holdings." });
+    }
+    if (existingHolding.qty < qty) {
+      return res.status(400).json({ message: "Insufficient quantity to sell." });
+    }
+
+    // 3. If validation passes, update the holding
+    existingHolding.qty -= qty;
+    existingHolding.price = price; // Update to the latest price
+
+    // 4. Check if the holding should be removed or updated
+    if (existingHolding.qty === 0) {
+      // If quantity is now zero, remove the stock from holdings
+      await existingHolding.deleteOne(); // or .remove() depending on Mongoose version
+      res.send("Stock sold and removed from holdings.");
+    } else {
+      // Otherwise, just save the updated quantity
+      await existingHolding.save();
+      res.send("Holding updated successfully after sale.");
+    }
+
+  } catch (error) {
+    console.error("Error in /sellStock:", error);
+    res.status(500).json({ message: "Error processing sell order" });
+  }
+});
+
 app.listen(PORT, () => {
     console.log("App started");
     mongoose.connect(url);
