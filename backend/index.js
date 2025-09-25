@@ -259,11 +259,8 @@ app.post("/buyStock", async (req, res) => {
 app.post("/sellStock", async (req, res) => {
   try {
     const { name, qty, price } = req.body;
-    
-    // 1. Find the stock in your holdings
     const existingHolding = await HoldingsModel.findOne({ name: name });
 
-    // 2. Validate the request
     if (!existingHolding) {
       return res.status(404).json({ message: "Stock not found in your holdings." });
     }
@@ -271,22 +268,17 @@ app.post("/sellStock", async (req, res) => {
       return res.status(400).json({ message: "Insufficient quantity to sell." });
     }
 
-    // 3. If validation passes, update the holding
     existingHolding.qty -= qty;
-    existingHolding.price = price; // Update to the latest price
+    existingHolding.price = price; 
 
-    // 4. Check if the holding should be removed or updated
     if (existingHolding.qty === 0) {
-      // If quantity is now zero, remove the stock from holdings
-      await existingHolding.deleteOne(); // or .remove() depending on Mongoose version
+      await existingHolding.deleteOne();
       res.send("Stock sold and removed from holdings.");
     } else {
-      // Otherwise, just save the updated quantity
       await existingHolding.save();
       res.send("Holding updated successfully after sale.");
     }
-
-  } catch (error) {
+} catch (error) {
     console.error("Error in /sellStock:", error);
     res.status(500).json({ message: "Error processing sell order" });
   }
