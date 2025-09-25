@@ -30,4 +30,3 @@ root.render(
   <Footer/>
   </BrowserRouter>
 );
-
