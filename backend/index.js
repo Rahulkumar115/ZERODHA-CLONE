@@ -214,38 +214,31 @@ app.get("/allOrders", async(req,res) => {
     res.json(allOrders);
 });
 
-// This is the POST route for buying a stock
 app.post("/buyStock", async (req, res) => {
   try {
     const { name } = req.body;
     const qty = Number(req.body.qty);
     const price = Number(req.body.price);
-    
     const existingHolding = await HoldingsModel.findOne({ name: name });
 
     if (existingHolding) {
-      // If Holding Exists: Update it
       const oldQty = existingHolding.qty;
       const oldAvg = existingHolding.avg;
-
-      // Calculate the new weighted average cost
       const newAvg = ((oldAvg * oldQty) + (price * qty)) / (oldQty + qty);
       
-      // Update the document
       existingHolding.qty += qty;
       existingHolding.avg = newAvg;
-      existingHolding.price = price; // Update the last traded price
+      existingHolding.price = price; 
       
       await existingHolding.save();
       res.send("Holding updated successfully!");
 
     } else {
-      // If Holding Doesn't Exist: Create a new one
       const newHolding = new HoldingsModel({
         name: name,
         qty: qty,
-        avg: price,   // The first avg cost is the purchase price
-        price: price, // The current price is also the purchase price
+        avg: price,   
+        price: price, 
       });
 
       await newHolding.save();
