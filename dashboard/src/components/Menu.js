@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -7,6 +8,9 @@ const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [username, setUsername] = useState("");
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
   axios.get("http://localhost:3002/api/auth/check",
@@ -26,6 +30,25 @@ const Menu = () => {
 
   const handleProfileClick = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsProfileDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:3002/api/auth/logout", {}, { withCredentials: true });
+      window.location.href = "http://localhost:3000"; // Redirect to landing page after logout
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   const menuClass = "menu";
@@ -104,9 +127,32 @@ const Menu = () => {
           </li>
         </ul>
         <hr />
-        <div className="profile" onClick={handleProfileClick}>
+        <div className="profile" onClick={handleProfileClick} ref={dropdownRef} style={{ position: "relative", cursor: "pointer" }}>
           <div className="avatar">{username ? username[0].toUpperCase() : "U"}</div>
           <p className="username">{username || "USERNAME"}</p>
+          {isProfileDropdownOpen && (
+            <div className="profile-dropdown" style={{
+              position: "absolute",
+              top: "calc(100% + 10px)",
+              right: 0,
+              background: "white",
+              boxShadow: "0 2px 5px rgba(0,0,0,0.15)",
+              borderRadius: "4px",
+              zIndex: 1000,
+              width: "150px",
+            }}>
+              {/* Dropdown items */}
+              <div className="dropdown-item" style={{ padding: "10px", cursor: "pointer" }}>
+                Profile
+              </div>
+              <div className="dropdown-item" style={{ padding: "10px", cursor: "pointer" }}>
+                Settings
+              </div>
+              <div className="dropdown-item" style={{ padding: "10px", cursor: "pointer" }} onClick={handleLogout}>
+                Logout
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

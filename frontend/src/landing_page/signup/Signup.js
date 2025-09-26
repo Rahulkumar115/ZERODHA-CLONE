@@ -83,7 +83,7 @@ const handleSubmit = async (e) => {
         </button>
       </form>
       <p className="mt-3">
-              Already Registered? <Link to="/login">Login</Link>
+              Already Registered? <Link to="/login" style={{textDecoration:"none"}}>Login</Link>
             </p>
     </div>
   );

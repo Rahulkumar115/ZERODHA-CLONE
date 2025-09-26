@@ -60,7 +60,7 @@ const Login = () => {
         </button>
       </form>
       <p className="mt-3">
-        Don't have an account? <Link to="/signup">Sign Up</Link>
+        Don't have an account? <Link to="/signup" style={{textDecoration:"none"}}>Sign Up</Link>
       </p>
     </div>
   );

@@ -89,4 +89,14 @@ router.get("/check", (req, res) => {
 }
 });
 
+// Logout route to clear cookie
+router.post("/logout", (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: false, // set to true in production with HTTPS
+    sameSite: "lax",
+  });
+  res.json({ message: "Logged out successfully" });
+});
+
 module.exports = router;
