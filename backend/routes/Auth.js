@@ -9,13 +9,11 @@ const router = express.Router();
 
 router.use(cookieParser());
 
-// If this is your main app file (e.g., index.js or app.js), set CORS as:
 router.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:3001"], // Frontend and Dashboard
+  origin: ["http://localhost:3000", "http://localhost:3001"], 
   credentials: true,
 }));
 
-// Signup
 router.post("/signup", async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -28,7 +26,6 @@ router.post("/signup", async (req, res) => {
 
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET || "secretkey", { expiresIn: "1h" });
 
-    // Set token as HTTP-only cookie
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,
@@ -45,7 +42,6 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// Login
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -57,7 +53,6 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || "secretkey", { expiresIn: "1h" });
 
-    // Set token in HTTP-only cookie
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,
@@ -78,10 +73,20 @@ router.get("/check", (req, res) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || "secretkey");
-    res.json({ valid: true, userId: decoded.id });
+    User.findById(decoded.id).then(user => {
+      if (!user) return res.status(401).json({ valid: false });
+      res.json({
+        valid: true,
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+        }
+      });
+    });
   } catch {
     res.status(401).json({ valid: false });
-  }
+}
 });
 
 module.exports = router;

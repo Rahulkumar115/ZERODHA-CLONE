@@ -1,4 +1,3 @@
-// frontend/src/landing_page/signup/Signup.js
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +14,6 @@ function Signup() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // handle input change
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -23,18 +21,15 @@ function Signup() {
     });
   };
 
-  // handle form submit
-  // In frontend/src/landing_page/signup/Signup.js
-
 const handleSubmit = async (e) => {
   e.preventDefault();
   setError("");
   setLoading(true);
   try {
     await axios.post("http://localhost:3002/api/auth/signup", formData, {
-      withCredentials: true, // send cookies properly
+      withCredentials: true, 
     });
-    window.location.href = "http://localhost:3001"; // redirect to dashboard
+    window.location.href = "http://localhost:3001";
   } catch (err) {
     setError(err.response?.data?.message || "Signup failed. Try again.");
   } finally {

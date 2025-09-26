@@ -19,10 +19,9 @@ const app = express();
 
 const jwt = require("jsonwebtoken");
 
-// Verify token API
 app.get("/verifyToken", (req, res) => {
   const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1]; // remove "Bearer"
+  const token = authHeader && authHeader.split(" ")[1];
 
   if (!token) {
     return res.status(401).json({ valid: false, message: "No token provided" });

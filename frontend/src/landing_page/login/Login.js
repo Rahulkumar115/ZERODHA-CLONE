@@ -19,7 +19,7 @@ const Login = () => {
     await axios.post("http://localhost:3002/api/auth/login", formData, {
       withCredentials: true, // important to send cookies
     });
-    window.location.href = "http://localhost:3001"; // dashboard URL
+    window.location.href = "http://localhost:3001";
   } catch (err) {
     setError(err.response?.data?.message || "Error logging in.");
   } finally {
@@ -32,7 +32,6 @@ const Login = () => {
       <h2 className="mb-4">Login</h2>
       {error && <div className="alert alert-danger">{error}</div>}
 
-      {/* This 'onSubmit={handleSubmit}' is the crucial part */}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Email address</label>

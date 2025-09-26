@@ -6,17 +6,17 @@ import axios from "axios";
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-  const [userId, setUserId] = useState("");
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
   axios.get("http://localhost:3002/api/auth/check",
     { withCredentials: true})
       .then((res) => {
         if(res.data.valid){
-          setUserId(res.data.userId || "");
+          setUsername(res.data.user?.name || "");
         }
       }).catch(() => {
-        setUserId("");
+        setUsername("");
       });
   }, []);
 
@@ -105,8 +105,8 @@ const Menu = () => {
         </ul>
         <hr />
         <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">{userId ? userId[0].toUpperCase() : "U"}</div>
-          <p className="username">{userId || ""}</p>
+          <div className="avatar">{username ? username[0].toUpperCase() : "U"}</div>
+          <p className="username">{username || "USERNAME"}</p>
         </div>
       </div>
     </div>
