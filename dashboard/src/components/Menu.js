@@ -1,16 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+  axios.get("http://localhost:3002/api/auth/check",
+    { withCredentials: true})
+      .then((res) => {
+        if(res.data.valid){
+          setUserId(res.data.userId || "");
+        }
+      }).catch(() => {
+        setUserId("");
+      });
+  }, []);
 
   const handleMenuClick = (index) => {
     setSelectedMenu(index);
   };
 
-  const handleProfileClick = (index) => {
+  const handleProfileClick = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
@@ -91,8 +105,8 @@ const Menu = () => {
         </ul>
         <hr />
         <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">ZU</div>
-          <p className="username">USERID</p>
+          <div className="avatar">{userId ? userId[0].toUpperCase() : "U"}</div>
+          <p className="username">{userId || ""}</p>
         </div>
       </div>
     </div>

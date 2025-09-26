@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
@@ -9,13 +10,40 @@ const {HoldingsModel} = require('./model/HoldingsModel');
 const {PositionsModel} = require('./model/PositionsModel');
 const {OrdersModel} = require("./model/OrdersModel");
 
+const authRoutes = require("./routes/Auth");
+
 const PORT = process.env.PORT || 3002;
 const url = process.env.MONGO_URL;
 
 const app = express();
 
-app.use(cors());
+const jwt = require("jsonwebtoken");
+
+// Verify token API
+app.get("/verifyToken", (req, res) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1]; // remove "Bearer"
+
+  if (!token) {
+    return res.status(401).json({ valid: false, message: "No token provided" });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET || "secretkey", (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ valid: false, message: "Invalid or expired token" });
+    }
+    res.json({ valid: true, user: decoded });
+  });
+});
+
+app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  credentials: true,
+}));
+
+app.use("/api/auth", authRoutes);
 
 // app.get('/addHoldings', async(req,res) => {
 //     let tempHoldings=[
@@ -278,7 +306,6 @@ app.post("/sellStock", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log("App started");
-    mongoose.connect(url);
-    console.log("app started");
+    console.log("App started", PORT);
+    mongoose.connect(url).then(() => console.log("app started"));
 });
