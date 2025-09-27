@@ -89,14 +89,43 @@ router.get("/check", (req, res) => {
 }
 });
 
-// Logout route to clear cookie
 router.post("/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: false, // set to true in production with HTTPS
+    secure: false, 
     sameSite: "lax",
   });
   res.json({ message: "Logged out successfully" });
+});
+
+// PUT /api/user/update
+router.put("/user/update", async (req, res) => {
+  res.set('Cache-Control', 'no-store'); 
+
+  const token = req.cookies.token;
+  if (!token) return res.status(401).json({ message: "Unauthorized" });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "secretkey");
+    const user = await User.findById(decoded.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const { name, email, currentPassword, newPassword } = req.body;
+
+    if (name) user.name = name;
+    if (email) user.email = email;
+    if (newPassword) {
+      if (!currentPassword) return res.status(400).json({ message: "Current password required" });
+      const isMatch = await bcrypt.compare(currentPassword, user.password);
+      if (!isMatch) return res.status(400).json({ message: "Current password incorrect" });
+      user.password = await bcrypt.hash(newPassword, 10);
+    }
+
+    await user.save();
+    res.json({ message: "Profile updated", user: { id: user._id, name: user.name, email: user.email } });
+  } catch (err) {
+    res.status(401).json({ message: "Invalid token or error updating profile" });
+  }
 });
 
 module.exports = router;

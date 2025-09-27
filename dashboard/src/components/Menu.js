@@ -51,6 +51,10 @@ const Menu = () => {
     }
   };
 
+  const handleProfile = () => {
+  navigate("/profile");
+};
+
   const menuClass = "menu";
   const activeMenuClass = "menu selected";
 
@@ -142,7 +146,7 @@ const Menu = () => {
               width: "150px",
             }}>
               {/* Dropdown items */}
-              <div className="dropdown-item" style={{ padding: "10px", cursor: "pointer" }}>
+              <div className="dropdown-item" style={{ padding: "10px", cursor: "pointer" }} onClick={handleProfile}>
                 Profile
               </div>
               <div className="dropdown-item" style={{ padding: "10px", cursor: "pointer" }}>
