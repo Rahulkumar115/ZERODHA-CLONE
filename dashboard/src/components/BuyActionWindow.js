@@ -19,9 +19,9 @@ const handleBuyClick = async () => {
   };
 
   try {
-    await axios.post("http://localhost:3002/buyStock", orderDetails);
+    await axios.post(`${process.env.REACT_APP_API_URL}/buyStock`, orderDetails);
     
-    await axios.post("http://localhost:3002/newOrder", {
+    await axios.post(`${process.env.REACT_APP_API_URL}/newOrder`, {
       ...orderDetails,
       mode: "BUY",
     });

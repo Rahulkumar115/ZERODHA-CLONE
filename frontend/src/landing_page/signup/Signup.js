@@ -26,10 +26,10 @@ const handleSubmit = async (e) => {
   setError("");
   setLoading(true);
   try {
-    await axios.post("http://localhost:3002/api/auth/signup", formData, {
+    await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/signup`, formData, {
       withCredentials: true, 
     });
-    window.location.href = "http://localhost:3001";
+    window.location.href = process.env.REACT_APP_DASHBOARD_URL;
   } catch (err) {
     setError(err.response?.data?.message || "Signup failed. Try again.");
   } finally {

@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
   const [isValid, setIsValid] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:3002/api/auth/check", { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_API_URL}/api/auth/check`, { withCredentials: true })
       .then((res) => {
         setIsValid(res.data.valid);
       })
@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (!isValid) {
-    return <Navigate to="http://localhost:3000/login" replace />;
+    return <Navigate to={`${process.env.REACT_APP_FRONTEND_URL}/login`} replace />;
   }
 
   return children;

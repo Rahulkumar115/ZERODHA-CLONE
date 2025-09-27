@@ -19,9 +19,9 @@ const SellActionWindow = ({ uid }) => {
     };
 
     try {
-      const response = await axios.post("http://localhost:3002/sellStock", stockToSell);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/sellStock`, stockToSell);
 
-      await axios.post("http://localhost:3002/newOrder", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/newOrder`, {
         ...stockToSell,
         mode: "SELL",
       });

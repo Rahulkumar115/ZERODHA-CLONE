@@ -17,7 +17,7 @@ const Profile = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3002/api/auth/check", { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_API_URL}/api/auth/check`, { withCredentials: true })
       .then(res => {
         if (res.data.valid) {
           setUser(res.data.user);
@@ -41,7 +41,7 @@ const Profile = () => {
     }
     try {
       const res = await axios.put(
-        "http://localhost:3002/api/auth/user/update",
+        `${process.env.REACT_APP_API_URL}/api/auth/user/update`,
         formData,
         { withCredentials: true, headers: { "Content-Type": "application/json" } }
       );

@@ -10,7 +10,7 @@ const router = express.Router();
 router.use(cookieParser());
 
 router.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:3001"], 
+  origin: ["https://zerodha-clone-app-yfih.onrender.com", "https://zerodhad-clone-app.onrender.com"], 
   credentials: true,
 }));
 

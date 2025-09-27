@@ -13,7 +13,7 @@ const Menu = () => {
 
 
   useEffect(() => {
-  axios.get("http://localhost:3002/api/auth/check",
+  axios.get(`${process.env.REACT_APP_API_URL}/api/auth/check`,
     { withCredentials: true})
       .then((res) => {
         if(res.data.valid){
@@ -44,8 +44,8 @@ const Menu = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:3002/api/auth/logout", {}, { withCredentials: true });
-      window.location.href = "http://localhost:3000"; // Redirect to landing page after logout
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/logout`, {}, { withCredentials: true });
+      window.location.href = process.env.REACT_APP_FRONTEND_URL; // Redirect to landing page after logout
     } catch (error) {
       console.error("Logout error:", error);
     }

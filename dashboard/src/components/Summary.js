@@ -5,7 +5,7 @@ const Summary = () => {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3002/api/auth/check", { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_API_URL}/api/auth/check`, { withCredentials: true })
       .then((res) => {
         if (res.data.valid) {
           setUsername(res.data.user?.name || "User");

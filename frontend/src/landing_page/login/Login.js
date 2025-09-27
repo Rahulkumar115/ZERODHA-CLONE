@@ -16,10 +16,10 @@ const Login = () => {
   setError("");
   setLoading(true);
   try {
-    await axios.post("http://localhost:3002/api/auth/login", formData, {
+    await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, formData, {
       withCredentials: true, // important to send cookies
     });
-    window.location.href = "http://localhost:3001";
+    window.location.href = process.env.REACT_APP_DASHBOARD_URL;
   } catch (err) {
     setError(err.response?.data?.message || "Error logging in.");
   } finally {
