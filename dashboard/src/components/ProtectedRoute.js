@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+import ExternalRedirect from "./ExternalRedirect";
 
 const ProtectedRoute = ({ children }) => {
   const [isValid, setIsValid] = useState(null);
@@ -20,7 +21,7 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (!isValid) {
-    return <Navigate to={`${process.env.REACT_APP_FRONTEND_URL}/login`} replace />;
+    return <ExternalRedirect to={`${process.env.REACT_APP_FRONTEND_URL}/login`} />;
   }
 
   return children;
