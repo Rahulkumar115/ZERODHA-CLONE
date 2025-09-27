@@ -90,6 +90,7 @@ router.get("/check", (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
+  // The options object is now the second argument inside clearCookie()
   res.clearCookie("token", {
     httpOnly: true,
     secure: true, 
