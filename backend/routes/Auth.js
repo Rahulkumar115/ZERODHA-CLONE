@@ -28,8 +28,8 @@ router.post("/signup", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 3600000,
     });
 
@@ -55,8 +55,8 @@ router.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 3600000,
     });
 
@@ -92,8 +92,8 @@ router.get("/check", (req, res) => {
 router.post("/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: false, 
-    sameSite: "lax",
+    secure: true, 
+    sameSite: "none",
   });
   res.json({ message: "Logged out successfully" });
 });
